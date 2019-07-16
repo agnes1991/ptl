@@ -5,7 +5,21 @@ import json
 
 path = '/Users/agnes/Desktop/支付系统.postman_collection.json'
 
-def par_json(path):
+
+
+# 获取接口参数个数
+file= open(path,'rb')
+api_file = json.load(file)
+api_name = api_file['item']
+num= len(api_name)
+print(len(api_name))
+print(api_file)
+
+
+# for i in len(api_name):
+#     print(i)
+n=0
+def par_json(path,n):
     j_file = open(path,'rb')
     j_content = json.load(j_file)
     info = j_content['info']
@@ -31,16 +45,13 @@ def par_json(path):
     循环取请求参数key和value，并分别赋值给aug_key,aug_value
     """
 
-    i =0
+    # i =0
     aug_key = []
     aug_value = []
-    while i < 5:
-        aug_key.append(body[i]['key'])
-        aug_value.append(body[i]['value'])
-        # print(api_body[i]['key'],api_body[i]['value'])
-        # print(i)
-        # print(param)
-        i = i+1
+    while n < 5:
+        aug_key.append(body[n]['key'])
+        aug_value.append(body[n]['value'])
+        n = n+1
     # print(aug_value,aug_key)
     # print(aug_key[0],aug_value[0])
 
@@ -49,7 +60,6 @@ def par_json(path):
     body=key1+value1&key2=value2&......
     """
 
-    n=0
     param = []
     api_body = ""
     while n < 5:
@@ -69,4 +79,8 @@ def par_json(path):
     return (p_name,api_name,api_reqmethod,api_contenttype,api_domain,api_path,api_body)
 
 # par_json(path)
-print(par_json(path))
+
+
+while n < num:
+    print(par_json(path,n))
+    n+=1
